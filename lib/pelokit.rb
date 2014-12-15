@@ -1,5 +1,4 @@
 require "pelokit/version"
+require "pelokit/bank_account"
 
-module Pelokit
-  # Your code goes here...
-end
+module Pelokit; end
