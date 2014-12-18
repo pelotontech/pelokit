@@ -15,20 +15,20 @@ module Pelokit
 
     def add
       attrs = {
-        client_id:                   '58',
-        account_name:                'Factorial Systems',
-        password:                    'Password123',
-        application_name:            'soapui',
-        bank_account_id:             'd',
-        bank_account_name:           'atb3 account',
-        bank_account_owner:          'rowing canada',
-        bank_account_type_code:      1,
-        financial_insitution_number: 000,
-        branch_transit_number:       00000,
-        account_number:              00000000,
-        currency_code:               'cad',
-        verify_account_by_deposit:   0,
-        language_code:               'en',
+        'ClientId'                  => '58',
+        'AccountName'               => 'Factorial Systems',
+        'Password'                  => 'Password123',
+        'ApplicationName'           => 'soapui',
+        'BankAccountId'             =>  nil,
+        'BankAccountName'           =>  'atb3 account whatever',
+        'BankAccountOwner'          =>  'rowing canada',
+        'BankAccountTypeCode'       =>  1,
+        'FinancialInsitutionNumber' => 000,
+        'BranchTransitNumber'       => 00000,
+        'AccountNumber'             => 00000000,
+        'CurrencyCode'              => 'cad',
+        'VerifyAccountByDeposit'    => 0,
+        'LanguageCode'              => 'en',
       }
       begin
         response = client.call(:add_bank_account, message: { "addBankAccountRequest" => attrs })
