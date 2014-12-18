@@ -1,27 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:pel="http://www.peloton-technologies.com/">
-   <soap:Header/>
-   <soap:Body>
-      <pel:AddBankAccount>
-         <pel:addBankAccountRequest>
-            <pel:ClientId>57</pel:ClientId>
-            <pel:AccountName>Factorial Systems</pel:AccountName>
-            <pel:Password>Password123</pel:Password>
-            <pel:ApplicationName>SOAPUI</pel:ApplicationName>
-<!--             <pel:BankAccountId></pel:BankAccountId>
-            <pel:BankAccountName>ATB3 Account</pel:BankAccountName>
-            <pel:BankAccountOwner>Rowing Canada</pel:BankAccountOwner>
-            <pel:BankAccountTypeCode>1</pel:BankAccountTypeCode>
-            <pel:FinancialInsitutionNumber>000</pel:FinancialInsitutionNumber>
-            <pel:BranchTransitNumber>00000</pel:BranchTransitNumber>
-            <pel:AccountNumber>00000000</pel:AccountNumber>
-            <pel:CurrencyCode>CAD</pel:CurrencyCode>
-            <pel:VerifyAccountByDeposit>0</pel:VerifyAccountByDeposit>
-            <pel:LanguageCode>en</pel:LanguageCode>
-            <pel:Reference1></pel:Reference1>
-            <pel:Reference2></pel:Reference2>
-            <pel:Reference3></pel:Reference3>
- -->         </pel:addBankAccountRequest>
-      </pel:AddBankAccount>
-   </soap:Body>
+  <soap:Header/>
+  <soap:Body>
+     <pel:AddBankAccount>
+        <pel:addBankAccountRequest>
+           <pel:ClientId>58</pel:ClientId>
+           <pel:AccountName>Factorial Systems</pel:AccountName>
+           <pel:Password>Password123</pel:Password>
+           <pel:ApplicationName>SOAPUI</pel:ApplicationName>
+           <pel:BankAccountId>Still Working</pel:BankAccountId>
+           <pel:BankAccountName>Yup Still Working YAY</pel:BankAccountName>
+           <pel:BankAccountOwner>Rowing Canada</pel:BankAccountOwner>
+           <pel:BankAccountTypeCode>1</pel:BankAccountTypeCode>
+           <pel:FinancialInsitutionNumber>000</pel:FinancialInsitutionNumber>
+           <pel:BranchTransitNumber>00000</pel:BranchTransitNumber>
+           <pel:AccountNumber>00000000</pel:AccountNumber>
+           <pel:CurrencyCode>CAD</pel:CurrencyCode>
+           <pel:VerifyAccountByDeposit>0</pel:VerifyAccountByDeposit>
+<!--        <pel:Document>  </pel:Document>
+           <pel:DocumentFilename></pel:DocumentFilename>
+           <pel:DocumentMediaType></pel:DocumentMediaType>
+-->
+           <pel:LanguageCode>en</pel:LanguageCode>
+           <pel:Reference1></pel:Reference1>
+           <pel:Reference2></pel:Reference2>
+           <pel:Reference3></pel:Reference3>
+        </pel:addBankAccountRequest>
+     </pel:AddBankAccount>
+  </soap:Body>
 </soap:Envelope>
