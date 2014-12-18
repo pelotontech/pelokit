@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:tns="http://www.peloton-technologies.com/" xmlns:env="http://www.w3.org/2003/05/soap-envelope" >
+  <env:Header />
+  <env:Body>
+    <tns:AddBankAccount>
+      <tns:addBankAccountRequest>
+        <tns:clientId>57</tns:clientId>
+        <tns:accountName>Factorial Systems</tns:accountName>
+        <tns:password>Password123</tns:password>
+        <tns:applicationName>soapui</tns:applicationName>
+        <tns:bankAccountId>d</tns:bankAccountId>
+        <tns:bankAccountName>atb3 account</tns:bankAccountName>
+        <tns:bankAccountOwner>rowing canada</tns:bankAccountOwner>
+        <tns:bankAccountTypeCode>1</tns:bankAccountTypeCode>
+        <tns:financialInsitutionNumber>0</tns:financialInsitutionNumber>
+        <tns:branchTransitNumber>0</tns:branchTransitNumber>
+        <tns:accountNumber>0</tns:accountNumber>
+        <tns:currencyCode>cad</tns:currencyCode>
+        <tns:verifyAccountByDeposit>0</tns:verifyAccountByDeposit>
+        <!-- <tns:document /> -->
+        <tns:languageCode>en</tns:languageCode>
+        <tns:reference1 />
+        <tns:reference2 />
+        <tns:reference3 />
+      </tns:addBankAccountRequest>
+    </tns:AddBankAccount>
+  </env:Body>
+</env:Envelope>
