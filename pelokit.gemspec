@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "fuubar", "~> 2.0"
   spec.add_runtime_dependency "activesupport"
-  spec.add_runtime_dependency "savon"
+  spec.add_runtime_dependency "savon", "~> 2.11.0"
 end
