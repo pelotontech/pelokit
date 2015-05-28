@@ -18,6 +18,10 @@ module Pelokit
       request :add_bank_account
     end
 
+    def modify
+      request :modify_bank_account
+    end
+
     private
     def request(method)
       options = { }
