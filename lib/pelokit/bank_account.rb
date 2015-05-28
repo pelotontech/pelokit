@@ -1,49 +1,47 @@
 require 'savon'
+require 'hashie'
 
 module Pelokit
-  class BankAccount
-    def initialize
-    end
+  class BankAccount < Hashie::Dash
 
-    def xml
-      IO.read '/Users/dliggat/git/peloton/pelokit/savon.xml'
-    end
-
-    def craig
-      IO.read '/Users/dliggat/git/peloton/pelokit/craig.xml'
-    end
+    property :bank_account_id
+    property :bank_account_name
+    property :bank_account_owner
+    property :bank_account_type_code
+    property :financial_insitution_number
+    property :branch_transit_number
+    property :account_number
+    property :currency_code
+    property :verify_account_by_deposit
 
     def add
-      attrs = {
-        'ClientId'                  => '58',
-        'AccountName'               => 'Factorial Systems',
-        'Password'                  => 'Password123',
-        'ApplicationName'           => 'soapui',
-        'BankAccountId'             =>  nil,
-        'BankAccountName'           =>  'atb3 account whatever',
-        'BankAccountOwner'          =>  'rowing canada',
-        'BankAccountTypeCode'       =>  1,
-        'FinancialInsitutionNumber' => 000,
-        'BranchTransitNumber'       => 00000,
-        'AccountNumber'             => 00000000,
-        'CurrencyCode'              => 'cad',
-        'VerifyAccountByDeposit'    => 0,
-        'LanguageCode'              => 'en',
-      }
-      begin
-        response = client.call(:add_bank_account, message: { "addBankAccountRequest" => attrs })
-        # response = client.call(:add_bank_account, xml: craig)
-      rescue Savon::SOAPFault, Savon::HTTPError => error
-        error
+      request :add_bank_account
+    end
+
+    private
+    def request(method)
+      options = { }
+      options.merge! self.to_hash
+      options.merge! Pelokit::api_args
+
+      # Camelize the hash keys for the request.
+      options = options.inject({}) do |opts, (k,v)|
+        opts[k.to_s.camelize] = v
+        opts
       end
+
+      # Invoke the method; include a request wrapper.
+      response = client.call(method,
+                             message: { "#{method.to_s.camelize(:lower)}Request" => options })
+      response
+    rescue Savon::SOAPFault, Savon::HTTPError => error
+      raise error
     end
 
     def client
       @client ||= Savon.client do
-        wsdl("http://test.peloton-technologies.com/EppBanking.asmx?WSDL")
-        # namespaces("xmlns:pel" => "http://www.peloton-technologies.com")
+        wsdl(Pelokit::WSDL)
       end
-      # client.operations => [:add_bank_account, :modify_bank_account, :withdraw_funds, :deposit_funds]
     end
 
   end
