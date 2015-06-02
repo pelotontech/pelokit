@@ -44,7 +44,7 @@ module Pelokit
 
     def client
       @client ||= Savon.client do
-        wsdl(Pelokit::WSDL)
+        wsdl(Pelokit.wsdl)
       end
     end
 
