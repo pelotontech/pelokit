@@ -1,5 +1,6 @@
 require 'savon'
 require 'hashie'
+require 'active_support/all'
 
 module Pelokit
   class BankAccount < Hashie::Dash
@@ -23,7 +24,7 @@ module Pelokit
     end
 
     private
-    def request(method)
+    def options
       options = { }
       options.merge! self.to_hash
       options.merge! Pelokit::api_args
@@ -33,7 +34,10 @@ module Pelokit
         opts[k.to_s.camelize] = v
         opts
       end
+      options
+    end
 
+    def request(method)
       # Invoke the method; include a request wrapper.
       response = client.call(method,
                              message: { "#{method.to_s.camelize(:lower)}Request" => options })
