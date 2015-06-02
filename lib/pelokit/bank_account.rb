@@ -18,7 +18,7 @@ module Pelokit
       request :add_bank_account
     end
 
-    def modify
+    def update
       request :modify_bank_account
     end
 
