@@ -2,6 +2,13 @@
 
 A gem for interacting with the Peloton API.
 
+## Gem Usage
+For now, given the gem's alpha nature, use:
+
+```ruby
+# Gemfile
+gem 'pelokit', git: 'https://github.com/pelotontech/pelokit.git', branch: 'alpha'
+```
 
 ## Setup
 
