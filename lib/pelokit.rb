@@ -1,5 +1,6 @@
 require "pelokit/version"
 require "pelokit/bank_account"
+# require "pelokit/mixins/peloton_request"
 
 module Pelokit
   @wsdl = 'http://test.peloton-technologies.com/EppBanking.asmx?WSDL'
