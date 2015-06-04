@@ -1,5 +1,5 @@
 require 'hashie'
-require "pelokit/concerns/request"
+require 'pelokit/concerns/request'
 
 module Pelokit
   class BankAccount < Hashie::Dash
@@ -17,11 +17,11 @@ module Pelokit
     property :verify_account_by_deposit
 
     def add
-      request :add_bank_account
+      request :add_bank_account, :addBankAccountRequest
     end
 
     def update
-      request :modify_bank_account
+      request :modify_bank_account, :modifyBankAccountRequest
     end
 
   end

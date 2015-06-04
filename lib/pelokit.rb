@@ -1,5 +1,6 @@
-require "pelokit/version"
-require "pelokit/bank_account"
+require 'pelokit/version'
+require 'pelokit/bank_account'
+require 'pelokit/electronic_funds_transfer'
 
 module Pelokit
   @wsdl = 'http://test.peloton-technologies.com/EppBanking.asmx?WSDL'

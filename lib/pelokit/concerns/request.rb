@@ -19,10 +19,9 @@ module Pelokit
       options
     end
 
-    def request(method)
+    def request(method, type)
       # Invoke the method; include a request wrapper.
-      response = client.call(method,
-                             message: { "#{method.to_s.camelize(:lower)}Request" => options })
+      response = client.call(method, message: { type => options })
       response
     rescue Savon::SOAPFault, Savon::HTTPError => error
       raise error
