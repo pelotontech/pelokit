@@ -5,6 +5,8 @@ module Pelokit
   module Request
     extend ActiveSupport::Concern
 
+    LOG = true
+
     private
     def options
       options = { }
@@ -13,7 +15,7 @@ module Pelokit
 
       # Camelize the hash keys for the request.
       options = options.inject({}) do |opts, (k,v)|
-        opts[k.to_s.camelize] = v
+        opts[k.to_s.camelize] = v.to_s
         opts
       end
       options
@@ -28,7 +30,7 @@ module Pelokit
     end
 
     def client
-      @client ||= Savon.client do
+      @client ||= Savon.client(pretty_print_xml: LOG) do
         wsdl(Pelokit.wsdl)
       end
     end

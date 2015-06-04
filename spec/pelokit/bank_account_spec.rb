@@ -8,20 +8,22 @@ describe Pelokit::BankAccount do
       c.password     = 'bar'
       c.account_name = 'baz'
     end
+  end
 
-    @items = { bank_account_id:             'my id',
-               bank_account_name:           'foobar',
-               bank_account_owner:          'owner',
-               bank_account_type_code:      '1',
-               financial_insitution_number: '001',
-               branch_transit_number:       '23232',
-               account_number:              '121212',
-               currency_code:               'CAD',
-               verify_account_by_deposit:   '1' }
+  let(:items) do
+    { bank_account_id:             'my id',
+      bank_account_name:           'foobar',
+      bank_account_owner:          'owner',
+      bank_account_type_code:      '1',
+      financial_insitution_number: '001',
+      branch_transit_number:       '23232',
+      account_number:              '121212',
+      currency_code:               'CAD',
+      verify_account_by_deposit:   '1' }
   end
 
   it 'should have the correct properties' do
-    obj = described_class.new @items
+    obj = described_class.new items
     expect(obj.to_hash).to eq({ bank_account_id:             'my id',
                                 bank_account_name:           'foobar',
                                 bank_account_owner:          'owner',
@@ -44,7 +46,7 @@ describe Pelokit::BankAccount do
   end
 
   it 'should build the options hash in camelized form' do
-    obj     = described_class.new @items
+    obj     = described_class.new items
     expect(obj.send(:options)).to match({"BankAccountId"=>"my id",
                                          "BankAccountName"=>"foobar",
                                          "BankAccountOwner"=>"owner",
