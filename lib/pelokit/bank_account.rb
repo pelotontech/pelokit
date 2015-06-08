@@ -17,7 +17,8 @@ module Pelokit
     property :verify_account_by_deposit
 
     def add
-      request :add_bank_account, :addBankAccountRequest
+      response = request :add_bank_account, :addBankAccountRequest
+      response
     end
 
     def update

@@ -6,6 +6,8 @@ module Pelokit
     extend ActiveSupport::Concern
 
     LOG = true
+    attr_accessor :success
+    attr_accessor :message
 
     private
     def options
@@ -24,7 +26,14 @@ module Pelokit
     def request(method, type)
       # Invoke the method; include a request wrapper.
       response = client.call(method, message: { type => options })
-      response
+      hash     = response.hash.try(:[], :envelope)
+                              .try(:[], :body)
+                              .try(:[], "#{method}_response".to_sym)
+                              .try(:[], "#{method}_result".to_sym)
+                              .with_indifferent_access
+      self.success = hash[:success]
+      self.message = hash[:message]
+      hash
     rescue Savon::SOAPFault, Savon::HTTPError => error
       raise error
     end
