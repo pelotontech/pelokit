@@ -5,6 +5,8 @@ module Pelokit
   module Request
     extend ActiveSupport::Concern
 
+    class Error < ArgumentError; end
+
     LOG = true
     attr_accessor :success
     attr_accessor :message
@@ -24,6 +26,9 @@ module Pelokit
     end
 
     def request(method, type)
+      if self.respond_to?(:valid?) && !self.valid?
+        raise Error.new self.errors.messages
+      end
       # Invoke the method; include a request wrapper.
       response = client.call(method, message: { type => options })
       hash     = response.hash.try(:[], :envelope)

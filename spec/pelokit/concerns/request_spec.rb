@@ -1,5 +1,6 @@
+require 'active_model'
 require 'spec_helper'
-require "savon/mock/spec_helper"
+require 'savon/mock/spec_helper'
 require 'hashie'
 
 describe Pelokit::Request do
@@ -14,6 +15,13 @@ describe Pelokit::Request do
         property :bar_baz
 
         include Pelokit::Request
+        include ActiveModel::Validations
+
+        def self.model_name
+          ActiveModel::Name.new(self, nil, "temp")
+        end
+
+        validates :foo_bar, presence: true
 
         def invoke
           request :add_bank_account, :addBankAccountRequest
@@ -45,7 +53,6 @@ describe Pelokit::Request do
       expect(@obj.send(:options)).to match(message)
     end
 
-
     it 'should parse the response XML' do
       savon.expects(:add_bank_account).with(message: { addBankAccountRequest: message }).returns(success_xml)
       response = @obj.invoke
@@ -55,5 +62,12 @@ describe Pelokit::Request do
                                 "message"=>"Success",
                                 "message_code"=>"0",
                                 "bank_account_id"=>"23234qw")
+    end
+
+    it 'should raise on request if the object is not valid' do
+      expect(@obj.valid?).to eq(true)
+      @obj.foo_bar = nil
+      expect(@obj.valid?).to eq(false)
+      expect { @obj.invoke }.to raise_error(Pelokit::Request::Error)
     end
 end

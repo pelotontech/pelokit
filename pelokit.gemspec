@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "fuubar", "~> 2.0"
   spec.add_dependency "activesupport"
+  spec.add_dependency "activemodel"
   spec.add_dependency "hashie"
   spec.add_dependency "savon", "~> 2.11.0"
 end

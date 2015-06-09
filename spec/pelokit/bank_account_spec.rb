@@ -45,6 +45,18 @@ describe Pelokit::BankAccount do
                                 verify_account_by_deposit:   '1' })
   end
 
+  it 'should be valid' do
+    obj = described_class.new items
+    expect(obj.valid?).to eq(true)
+  end
+
+  it 'should be invalid with incorrectly specified account number' do
+    obj = described_class.new items
+    obj.account_number = 'abc'
+    expect(obj.valid?).to eq(false)
+    expect(obj.errors.messages).to match(account_number: ['must be numeric'])
+  end
+
   it 'should build the options hash in camelized form' do
     obj     = described_class.new items
     expect(obj.send(:options)).to match({"BankAccountId"=>"my id",
