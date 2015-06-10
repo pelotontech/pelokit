@@ -22,6 +22,7 @@ module Pelokit
 
 end
 
+require 'pelokit/soap_base'
 require 'pelokit/bank_account'
 require 'pelokit/electronic_funds_transfer'
 require 'pelokit/pending_client'

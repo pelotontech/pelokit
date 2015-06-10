@@ -1,11 +1,11 @@
 require 'active_model'
 require 'hashie'
-require 'pelokit/concerns/request'
+require 'pelokit/concerns/soap_request'
 
 module Pelokit
-  class BankAccount < Hashie::Dash
+  class BankAccount < SoapBase
 
-    include Pelokit::Request
+    include Pelokit::SoapRequest
     include ActiveModel::Validations
 
     property :bank_account_id

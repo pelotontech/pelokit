@@ -2,7 +2,7 @@ require 'active_support/all'
 require 'savon'
 
 module Pelokit
-  module Request
+  module SoapRequest
     extend ActiveSupport::Concern
 
     class Error < ArgumentError; end
@@ -14,8 +14,8 @@ module Pelokit
     private
     def options
       options = { }
-      options.merge! self.to_hash
-      options.merge! Pelokit::api_args
+      options.merge! Pelokit::api_args  # Merge in the base settings first.
+      options.merge! self.to_hash       # Provide an override opportunity.
 
       # Camelize the hash keys for the request.
       options = options.inject({}) do |opts, (k,v)|

@@ -74,4 +74,24 @@ describe Pelokit::BankAccount do
                                          "ApplicationName"=>"pelokit #{Pelokit::VERSION}"})
 
   end
+  it 'should use other credentials if specified on the object' do
+    obj              = described_class.new items
+    obj.client_id    = 'other id'
+    obj.password     = 'other password'
+    obj.account_name = 'other account name'
+    expect(obj.send(:options)).to match({"BankAccountId"=>"my id",
+                                         "BankAccountName"=>"foobar",
+                                         "BankAccountOwner"=>"owner",
+                                         "BankAccountTypeCode"=>"1",
+                                         "FinancialInsitutionNumber"=>"001",
+                                         "BranchTransitNumber"=>"23232",
+                                         "AccountNumber"=>"121212",
+                                         "CurrencyCode"=>"CAD",
+                                         "VerifyAccountByDeposit"=>"1",
+                                         "ClientId"=>"other id",
+                                         "AccountName"=>"other account name",
+                                         "Password"=>"other password",
+                                         "ApplicationName"=>"pelokit #{Pelokit::VERSION}"})
+
+  end
 end

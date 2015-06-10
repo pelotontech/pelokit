@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'savon/mock/spec_helper'
 require 'hashie'
 
-describe Pelokit::Request do
+describe Pelokit::SoapRequest do
 
   include Savon::SpecHelper
   before(:all) { savon.mock!   }
@@ -14,7 +14,7 @@ describe Pelokit::Request do
         property :foo_bar
         property :bar_baz
 
-        include Pelokit::Request
+        include Pelokit::SoapRequest
         include ActiveModel::Validations
 
         def self.model_name
@@ -68,6 +68,6 @@ describe Pelokit::Request do
       expect(@obj.valid?).to eq(true)
       @obj.foo_bar = nil
       expect(@obj.valid?).to eq(false)
-      expect { @obj.invoke }.to raise_error(Pelokit::Request::Error)
+      expect { @obj.invoke }.to raise_error(Pelokit::SoapRequest::Error)
     end
 end
