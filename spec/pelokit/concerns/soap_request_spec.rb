@@ -1,7 +1,6 @@
 require 'active_model'
 require 'spec_helper'
 require 'savon/mock/spec_helper'
-require 'hashie'
 
 describe Pelokit::SoapRequest do
 
@@ -10,7 +9,7 @@ describe Pelokit::SoapRequest do
   after(:all)  { savon.unmock! }
 
     let :hashie_class do
-      Class.new(Hashie::Dash) do
+      Class.new(Pelokit::SoapBase) do
         property :foo_bar
         property :bar_baz
 
