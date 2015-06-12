@@ -8,7 +8,7 @@ module Pelokit
     include Pelokit::SoapRequest
     include ActiveModel::Validations
 
-    property :bank_account_id
+    property :bank_account_id, default: ''
     property :bank_account_name
     property :bank_account_owner
     property :bank_account_type_code
