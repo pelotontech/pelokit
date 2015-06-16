@@ -1,56 +1,41 @@
-require 'savon'
+require 'active_model'
 require 'hashie'
-require 'active_support/all'
+require 'pelokit/concerns/soap_request'
 
 module Pelokit
-  class BankAccount < Hashie::Dash
+  class BankAccount < SoapBase
 
-    property :bank_account_id
+    include Pelokit::SoapRequest
+    include ActiveModel::Validations
+
+    property :bank_account_id, default: ''
     property :bank_account_name
     property :bank_account_owner
     property :bank_account_type_code
     property :financial_insitution_number
     property :branch_transit_number
     property :account_number
-    property :currency_code
-    property :verify_account_by_deposit
+    property :currency_code,             default: 'CAD'
+    property :verify_account_by_deposit, default: '1'
+
+    validates :financial_insitution_number, presence: true,
+                                            format:   { with: /\A[0-9]+\z/, message: "must be numeric" }
+    validates :branch_transit_number, presence: true,
+                                      format:   { with: /\A[0-9]+\z/, message: "must be numeric" }
+    validates :account_number, presence: true,
+                               format:   { with: /\A[0-9]+\z/, message: "must be numeric" }
+    validates :bank_account_type_code, inclusion: %w[0 1]
+    validates :currency_code, inclusion: %w[USD CAD]
+
 
     def add
-      request :add_bank_account
-    end
-
-    def update
-      request :modify_bank_account
-    end
-
-    private
-    def options
-      options = { }
-      options.merge! self.to_hash
-      options.merge! Pelokit::api_args
-
-      # Camelize the hash keys for the request.
-      options = options.inject({}) do |opts, (k,v)|
-        opts[k.to_s.camelize] = v
-        opts
-      end
-      options
-    end
-
-    def request(method)
-      # Invoke the method; include a request wrapper.
-      response = client.call(method,
-                             message: { "#{method.to_s.camelize(:lower)}Request" => options })
+      response = request :add_bank_account, :addBankAccountRequest
       response
-    rescue Savon::SOAPFault, Savon::HTTPError => error
-      raise error
     end
 
-    def client
-      @client ||= Savon.client do
-        wsdl(Pelokit.wsdl)
-      end
-    end
+    # def update
+    #   request :modify_bank_account, :modifyBankAccountRequest
+    # end
 
   end
 end

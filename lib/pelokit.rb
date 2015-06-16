@@ -1,12 +1,12 @@
-require "pelokit/version"
-require "pelokit/bank_account"
+require 'pelokit/version'
 
 module Pelokit
   @wsdl = 'http://test.peloton-technologies.com/EppBanking.asmx?WSDL'
+  @rest = 'https://apitest.peloton-technologies.com/v1'
 
   class << self
     attr_writer   :client_id, :account_name, :password
-    attr_accessor :wsdl
+    attr_accessor :wsdl, :rest
 
     def configure(&block)
       yield self
@@ -21,3 +21,8 @@ module Pelokit
   end
 
 end
+
+require 'pelokit/soap_base'
+require 'pelokit/bank_account'
+require 'pelokit/electronic_funds_transfer'
+require 'pelokit/pending_client'
