@@ -3,11 +3,11 @@
 A gem for interacting with the Peloton API.
 
 ## Gem Usage
-For now, given the gem's alpha nature, use:
+In your `Gemfile`, point at this repo. In time, this will be added to [RubyGems](https://rubygems.org).
 
 ```ruby
 # Gemfile
-gem 'pelokit', git: 'https://github.com/pelotontech/pelokit.git', branch: 'alpha'
+gem 'pelokit', '~> 1.0.0', git: 'https://github.com/pelotontech/pelokit.git'
 ```
 
 ## Setup
@@ -22,24 +22,25 @@ Pelokit.configure do |c|
 end
 ```
 
-## BankAccounts
+## BankAccount
+`BankAccount` is th
+
+### Default Credentials
+Omit credentials, and `Pelokit` will use the underlying initializer credentials.
 
 ```ruby
-api_properties = {:bank_account_id=>"my id",
-                  :bank_account_name=>"foobar",
-                  :bank_account_owner=>"owner",
-                  :bank_account_type_code=>"1",
-                  :financial_insitution_number=>"001",
-                  :branch_transit_number=>"23232",
-                  :account_number=>"121212",
-                  :currency_code=>"CAD",
-                  :verify_account_by_deposit=>"1"}
+api_properties = { :bank_account_id             => "my id",
+                   :bank_account_name           => "foobar",
+                   :bank_account_owner          => "owner",
+                   :bank_account_type_code      => "1",
+                   :financial_insitution_number => "001",
+                   :branch_transit_number       => "23232",
+                   :account_number              => "121212",
+                   :currency_code               => "CAD",
+                   :verify_account_by_deposit   => "1" }
+
 peloton        = Pelokit::BankAccount.new api_properties
+
 # ....
 response = peloton.add
-puts response.body
-# ....
-peloton.bank_account_owner = 'new_owner'
-response = peloton.update
-puts response.body
 ```

@@ -12,6 +12,6 @@ describe Pelokit do
 
   it "should generate api args do" do
     expect(Pelokit.api_args.keys).to match_array([:client_id, :account_name, :password, :application_name])
-    expect(Pelokit.api_args[:application_name]).to match(/pelokit 0/)
+    expect(Pelokit.api_args[:application_name]).to match(/pelokit 1/)
   end
 end
