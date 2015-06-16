@@ -24,6 +24,19 @@ Pelokit.configure do |c|
 end
 ```
 
+### Endpoints
+
+By default `Pelokit` will target Peloton's test environment. URLs for different environments can be injected with the same Rails initializer approach:
+
+```ruby
+Pelokit.configure do |c|
+  # ...
+  c.wsdl = 'https://env-specific-wsdl... '
+  c.rest = 'https://env-specific-rest... '
+  # ...
+end
+```
+
 ## BankAccount
 `BankAccount` is a class for sending bank account coordinates to Peloton, and receiving back an identifier.
 
