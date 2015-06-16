@@ -1,5 +1,7 @@
 # Pelokit
 
+[![Build Status](https://travis-ci.org/pelotontech/pelokit.svg?branch=master)](https://travis-ci.org/pelotontech/pelokit)
+
 A gem for interacting with the Peloton API.
 
 ## Gem Usage
