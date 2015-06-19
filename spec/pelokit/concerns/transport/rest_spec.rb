@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Pelokit::RestRequest do
+describe Pelokit::Transport::Rest do
 
   let :resource_class do
     Class.new(Pelokit::RequestBase) do
 
-      include Pelokit::RestRequest
+      include Pelokit::Transport::Rest
       self.restful_resource = 'foos'
 
       def initialize(token)

@@ -1,16 +1,16 @@
 require 'active_model'
 require 'hashie'
-require 'pelokit/concerns/soap_request'
-require 'pelokit/concerns/rest_request'
+require 'pelokit/concerns/transport/soap'
+require 'pelokit/concerns/transport/rest'
 
 module Pelokit
   class BankAccount < RequestBase
 
 
-    include Pelokit::SoapRequest
+    include Pelokit::Transport::Soap
     include ActiveModel::Validations
 
-    include Pelokit::RestRequest
+    include Pelokit::Transport::Rest
     self.restful_resource = 'BankAccount'
 
     property :bank_account_id, default: ''

@@ -1,9 +1,9 @@
-require 'pelokit/concerns/rest_request'
+require 'pelokit/concerns/transport/rest'
 
 module Pelokit
   class PendingClient < RequestBase
 
-    include Pelokit::RestRequest
+    include Pelokit::Transport::Rest
 
     self.restful_resource = 'pendingclients'
 
