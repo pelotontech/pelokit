@@ -1,11 +1,11 @@
 require 'active_model'
 require 'hashie'
-require 'pelokit/concerns/soap_request'
+require 'pelokit/concerns/transport/soap'
 
 module Pelokit
-  class ElectronicFundsTransfer < SoapBase
+  class ElectronicFundsTransfer < RequestBase
 
-    include Pelokit::SoapRequest
+    include Pelokit::Transport::Soap
     include ActiveModel::Validations
 
     property :bank_account_id

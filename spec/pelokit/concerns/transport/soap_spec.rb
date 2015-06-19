@@ -2,18 +2,18 @@ require 'active_model'
 require 'spec_helper'
 require 'savon/mock/spec_helper'
 
-describe Pelokit::SoapRequest do
+describe Pelokit::Transport::Soap do
 
   include Savon::SpecHelper
   before(:all) { savon.mock!   }
   after(:all)  { savon.unmock! }
 
     let :hashie_class do
-      Class.new(Pelokit::SoapBase) do
+      Class.new(Pelokit::RequestBase) do
         property :foo_bar
         property :bar_baz
 
-        include Pelokit::SoapRequest
+        include Pelokit::Transport::Soap
         include ActiveModel::Validations
 
         def self.model_name
@@ -67,6 +67,6 @@ describe Pelokit::SoapRequest do
       expect(@obj.valid?).to eq(true)
       @obj.foo_bar = nil
       expect(@obj.valid?).to eq(false)
-      expect { @obj.invoke }.to raise_error(Pelokit::SoapRequest::Error)
+      expect { @obj.invoke }.to raise_error(Pelokit::Transport::Soap::Error)
     end
 end

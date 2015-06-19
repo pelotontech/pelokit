@@ -61,3 +61,10 @@ peloton        = Pelokit::BankAccount.new api_properties
 # ....
 response = peloton.add
 ```
+
+### Deleting Accounts
+
+```ruby
+account = Pelokit::BankAccount.new bank_account_id: '65238812f8cc4dbca1604c9cad96e5fa'
+result  = account.remove
+puts result.message
