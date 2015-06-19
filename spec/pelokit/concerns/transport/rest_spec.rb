@@ -15,6 +15,10 @@ describe Pelokit::Transport::Rest do
       def get
         get_request
       end
+
+      def remove
+        delete_request
+      end
     end
   end
 
@@ -32,12 +36,20 @@ describe Pelokit::Transport::Rest do
     expect(@obj.class.restful_resource).to eq('foos')
   end
 
-  it 'should build an OpenStruct from the response' do
+  it 'should build an OpenStruct from the response in a GET' do
     @obj.client_id = 'foo'
     @obj.password  = 'bar'
     HTTParty.expects(:get).with("#{Pelokit.rest}/foos/token", basic_auth: {username: 'foo', password: 'bar'})
                           .returns stub(code: 200, parsed_response: { a: '1' })
     expect(@obj.get).to eq(OpenStruct.new a: '1')
+  end
+
+  it 'should build an OpenStruct from the response in a DELETE' do
+    @obj.client_id = 'foo'
+    @obj.password  = 'bar'
+    HTTParty.expects(:delete).with("#{Pelokit.rest}/foos/token", basic_auth: {username: 'foo', password: 'bar'})
+                             .returns stub(code: 200, parsed_response: { a: '1' })
+    expect(@obj.remove).to eq(OpenStruct.new a: '1')
   end
 
 end
