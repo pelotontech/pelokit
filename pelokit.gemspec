@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "fuubar", "~> 2.0"
+  spec.add_development_dependency "guard-rspec"
   spec.add_dependency "activesupport"
   spec.add_dependency "activemodel"
   spec.add_dependency "hashie"
