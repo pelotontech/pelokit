@@ -3,7 +3,7 @@ require 'hashie'
 require 'pelokit/concerns/soap_request'
 
 module Pelokit
-  class ElectronicFundsTransfer < SoapBase
+  class ElectronicFundsTransfer < RequestBase
 
     include Pelokit::SoapRequest
     include ActiveModel::Validations

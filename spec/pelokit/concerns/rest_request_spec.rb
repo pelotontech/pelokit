@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Pelokit::RestRequest do
 
   let :resource_class do
-    Class.new do
+    Class.new(Pelokit::RequestBase) do
 
       include Pelokit::RestRequest
       self.restful_resource = 'foos'
@@ -35,8 +35,8 @@ describe Pelokit::RestRequest do
   it 'should build an OpenStruct from the response' do
     @obj.client_id = 'foo'
     @obj.password  = 'bar'
-    @obj.class.expects(:get).with('/foos/token', basic_auth: {username: 'foo', password: 'bar'})
-                            .returns stub(code: 200, parsed_response: { a: '1' })
+    HTTParty.expects(:get).with("#{Pelokit.rest}/foos/token", basic_auth: {username: 'foo', password: 'bar'})
+                          .returns stub(code: 200, parsed_response: { a: '1' })
     expect(@obj.get).to eq(OpenStruct.new a: '1')
   end
 

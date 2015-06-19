@@ -11,16 +11,21 @@ module Pelokit
 
     class RestError < Exception; end
 
-    include HTTParty
-    base_uri Pelokit.rest
-
-    attr_writer   :client_id, :password
     attr_accessor :id
 
     private
     def get_request
-      response = self.class.get("/#{self.restful_resource}/#{@id}", basic_auth: { username: client_id,
-                                                                                  password: password })
+      response = HTTParty.get("#{Pelokit.rest}/#{self.restful_resource}/#{@id}", basic_auth: { username: client_id,
+                                                                                 password: password })
+
+      raise RestError.new "#{response.code} #{response.message}" unless response.code == 200
+      obj = OpenStruct.new response.parsed_response
+      obj
+    end
+
+    def delete_request
+      response = HTTParty.delete("#{Pelokit.rest}/#{self.restful_resource}/#{@id}", basic_auth: { username: client_id,
+                                                                                password: password })
 
       raise RestError.new "#{response.code} #{response.message}" unless response.code == 200
       obj = OpenStruct.new response.parsed_response

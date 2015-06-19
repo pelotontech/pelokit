@@ -9,7 +9,7 @@ describe Pelokit::SoapRequest do
   after(:all)  { savon.unmock! }
 
     let :hashie_class do
-      Class.new(Pelokit::SoapBase) do
+      Class.new(Pelokit::RequestBase) do
         property :foo_bar
         property :bar_baz
 
