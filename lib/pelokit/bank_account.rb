@@ -1,12 +1,17 @@
 require 'active_model'
 require 'hashie'
-require 'pelokit/concerns/soap_request'
+require 'pelokit/concerns/transport/soap'
+require 'pelokit/concerns/transport/rest'
 
 module Pelokit
-  class BankAccount < SoapBase
+  class BankAccount < RequestBase
 
-    include Pelokit::SoapRequest
+
+    include Pelokit::Transport::Soap
     include ActiveModel::Validations
+
+    include Pelokit::Transport::Rest
+    self.restful_resource = 'BankAccount'
 
     property :bank_account_id, default: ''
     property :bank_account_name
@@ -30,6 +35,12 @@ module Pelokit
 
     def add
       response = request :add_bank_account, :addBankAccountRequest
+      response
+    end
+
+    def remove
+      self.id  = self.bank_account_id
+      response = delete_request
       response
     end
 

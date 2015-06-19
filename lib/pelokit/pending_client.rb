@@ -1,36 +1,19 @@
-require 'httparty'
-require 'ostruct'
+require 'pelokit/concerns/transport/rest'
 
 module Pelokit
-  class PendingClient
+  class PendingClient < RequestBase
 
-    class RestError < Exception; end
+    include Pelokit::Transport::Rest
 
-    include HTTParty
-    base_uri Pelokit.rest
-
-    attr_writer :client_id, :password
+    self.restful_resource = 'pendingclients'
 
     def initialize(token)
-      @token = token
+      @id = token
     end
 
     def get
-      response = self.class.get("/pendingclients/#{@token}", basic_auth: { username: client_id,
-                                                                           password: password })
-
-      raise RestError.new "#{response.code} #{response.message}" unless response.code == 200
-      obj = OpenStruct.new response.parsed_response
-      obj
+      get_request
     end
 
-    private
-    def client_id
-      @client_id || Pelokit.api_args[:client_id]
-    end
-
-    def password
-      @password || Pelokit.api_args[:password]
-    end
   end
 end
