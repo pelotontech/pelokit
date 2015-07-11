@@ -68,3 +68,13 @@ response = peloton.add
 account = Pelokit::BankAccount.new bank_account_id: '65238812f8cc4dbca1604c9cad96e5fa'
 result  = account.remove
 puts result.message
+```
+
+### Validations
+```ruby
+account = Pelokit::BankAccount.new bank_account_name: 'foo'
+account.valid?
+# false
+puts account.errors.full_messages
+# ["Financial insitution number can't be blank", "Financial insitution number must be numeric", "Branch transit number can't be blank", "Branch transit number must be numeric", "Account number can't be blank", "Account number must be numeric", "Bank account type code is not included in the list"]
+```

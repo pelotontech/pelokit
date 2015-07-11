@@ -6,7 +6,6 @@ require 'pelokit/concerns/transport/rest'
 module Pelokit
   class BankAccount < RequestBase
 
-
     include Pelokit::Transport::Soap
     include ActiveModel::Validations
 
@@ -23,14 +22,30 @@ module Pelokit
     property :currency_code,             default: 'CAD'
     property :verify_account_by_deposit, default: '1'
 
+    validates :bank_account_id, length: { minimum:   0,
+                                          maximum:   32,
+                                          allow_nil: false,
+                                          message:   "must be non-nil and length <= 32" }
+
+    validates :bank_account_name, presence: true
+
     validates :financial_insitution_number, presence: true,
+                                            length:   { maximum: 3 },
                                             format:   { with: /\A[0-9]+\z/, message: "must be numeric" }
+
     validates :branch_transit_number, presence: true,
+                                      length:   { maximum: 5 },
                                       format:   { with: /\A[0-9]+\z/, message: "must be numeric" }
+
     validates :account_number, presence: true,
+                               length:   { maximum: 12 },
                                format:   { with: /\A[0-9]+\z/, message: "must be numeric" }
-    validates :bank_account_type_code, inclusion: %w[0 1]
-    validates :currency_code, inclusion: %w[USD CAD]
+
+    validates :bank_account_type_code, inclusion: %w[0 1 2]
+
+    validates :currency_code, presence: true,
+                              length:   { maximum: 3 },  # Inclusion rule makes this superfluous for now, but needed in future.
+                              inclusion: %w[USD CAD]
 
 
     def add

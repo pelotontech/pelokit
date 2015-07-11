@@ -57,6 +57,27 @@ describe Pelokit::BankAccount do
     expect(obj.errors.messages).to match(account_number: ['must be numeric'])
   end
 
+  it 'should adhere to bank_account_id validation rules' do
+    obj = described_class.new items
+    expect(obj.valid?).to eq(true)
+    obj.bank_account_id = ''
+    expect(obj.valid?).to eq(true)
+    obj.bank_account_id = nil
+    expect(obj.valid?).to eq(false)
+    obj.bank_account_id = 'a' * 32
+    expect(obj.valid?).to eq(true)
+    obj.bank_account_id = 'a' * 33
+    expect(obj.valid?).to eq(false)
+  end
+
+  it 'should be invalid with incorrect length transit_number' do
+    obj = described_class.new items
+    expect(obj.valid?).to eq(true)
+    obj.branch_transit_number = '666666'
+    expect(obj.valid?).to eq(false)
+    expect(obj.errors.full_messages).to eq(['Branch transit number is too long (maximum is 5 characters)'])
+  end
+
   it 'should build the options hash in camelized form' do
     obj     = described_class.new items
     expect(obj.send(:options)).to match({"BankAccountId"             => "my id",
