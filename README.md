@@ -9,7 +9,7 @@ In your `Gemfile`, point at this repo. In time, this will be added to [RubyGems]
 
 ```ruby
 # Gemfile
-gem 'pelokit', '~> 1.1.0', git: 'https://github.com/pelotontech/pelokit.git'
+gem 'pelokit', '~> 1.1.2', git: 'https://github.com/pelotontech/pelokit.git'
 ```
 
 ## Setup

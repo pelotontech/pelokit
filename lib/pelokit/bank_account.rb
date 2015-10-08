@@ -10,7 +10,7 @@ module Pelokit
     include ActiveModel::Validations
 
     include Pelokit::Transport::Rest
-    self.restful_resource = 'BankAccount'
+    self.restful_resource = 'BankAccounts'
 
     property :bank_account_id, default: ''
     property :bank_account_name

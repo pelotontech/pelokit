@@ -2,7 +2,7 @@ require 'pelokit/version'
 
 module Pelokit
   @wsdl = 'http://test.peloton-technologies.com/EppBanking.asmx?WSDL'
-  @rest = 'https://apitest.peloton-technologies.com/v1'
+  @rest = 'https://testapi.peloton-technologies.com/v1'
 
   class << self
     attr_writer   :client_id, :account_name, :password
